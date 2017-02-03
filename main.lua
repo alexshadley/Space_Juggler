@@ -28,16 +28,16 @@ function love.load()
 end
 
 function love.update(dt)
-	player.position.x = love.mouse.getX()
+	player.position.x = love.mouse.getX() -- set the player position to the cursor; note that we can access the x and y components of the vector object directly
 	player.position.y = love.mouse.getY()
 	
-	for i, v in ipairs(ballList) do
+	for i, v in ipairs(ballList) do -- generic for that loops through ballList and calls the update function of each ball
 		v:update(dt)
 	end
 end
 
 function love.draw()
-	for i, v in ipairs(ballList) do
+	for i, v in ipairs(ballList) do -- generic for that loops through ballList and calls the draw function of each ball
 		v:draw()
 	end
 end

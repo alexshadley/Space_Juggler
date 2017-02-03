@@ -33,26 +33,24 @@ function ball:new(x, y)
 	o.position = vector.new(x, y)
 	o.velocity = vector.new(0, 0)
 	
-	--balancig variables
-	o.ACCELERATION_CONSTANT = 5000000 --constant that can be modified to alter how quickly balls are drawn towards the player
+	-- balancig variables
+	o.ACCELERATION_CONSTANT = 5000000 -- constant that can be modified to alter how quickly balls are drawn towards the player
 	
 	return o
 end
 
 function ball:update(dt)
-	--debug.debug()
-
-	local differenceVector = player.position - self.position
-	local normalVector = differenceVector:normalized()
-	local accelerationVector = normalVector * (self.ACCELERATION_CONSTANT / (differenceVector:len()^2) )
+	local differenceVector = player.position - self.position -- vector from the ball to the player
+	local normalVector = differenceVector:normalized() -- normal vector pointing towards the player
+	local accelerationVector = normalVector * (self.ACCELERATION_CONSTANT / (differenceVector:len()^2) ) -- based off of the gravitational acceleration equation, substituted the acceleration constant for mass of the player since that's arbitrary anyways
 	
-	self.velocity = self.velocity + accelerationVector * dt
-	self.position = self.position + self.velocity * dt
+	self.velocity = self.velocity + accelerationVector * dt -- update velocity with acceleration
+	self.position = self.position + self.velocity * dt -- update position with velocity
 end
 
 function ball:draw()
 	love.graphics.setColor(30, 30, 150)
-	love.graphics.circle("fill", self.position.x, self.position.y, 16, 20)
+	love.graphics.circle("fill", self.position.x, self.position.y, 16, 20) -- draw darker border
 	love.graphics.setColor(120, 120, 240)
-	love.graphics.circle("fill", self.position.x, self.position.y, 13, 20)
+	love.graphics.circle("fill", self.position.x, self.position.y, 13, 20) -- draw lighter inside
 end

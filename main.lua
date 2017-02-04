@@ -20,20 +20,30 @@ player.position = vector.new(0, 0) -- use the vector library to make a vector ob
 
 ballList = {} -- a list that contains all of the balls in the game
 
+song = love.audio.newSource("Space_Juggler.wav") -- import music
+
 function love.load()
+	love.audio.play(song)
+	
 	love.mouse.setPosition(400, 300) -- start the mouse in the center of the screen at the beginning of the game
 	
 	ballList[1] = ball:new(100, 100) -- make some balls and put them in the ball list
 	ballList[2] = ball:new(700, 500)
+	
+	gametime = 0
+	lastSpawnTime = 0
 end
 
 function love.update(dt)
+	gametime = gametime + dt
+	
 	player.position.x = love.mouse.getX() -- set the player position to the cursor; note that we can access the x and y components of the vector object directly
 	player.position.y = love.mouse.getY()
 	
 	for i, v in ipairs(ballList) do -- generic for that loops through ballList and calls the update function of each ball
 		v:update(dt)
 	end
+	
 end
 
 function love.draw()

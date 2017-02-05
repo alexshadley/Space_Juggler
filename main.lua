@@ -23,30 +23,72 @@ ballList = {} -- a list that contains all of the balls in the game
 song = love.audio.newSource("Space_Juggler.wav") -- import music
 
 function love.load()
+  love.window.setTitle("Space Juggler") -- Sets the title of the program
+
+	-- For the timer
+  dtotal = 0
+  seconds = 0
+  minutes = 0
+  hours = 0
+  time = ""
+
 	love.audio.play(song)
-	
+
 	love.mouse.setPosition(400, 300) -- start the mouse in the center of the screen at the beginning of the game
-	
+
 	ballList[1] = ball:new(100, 100) -- make some balls and put them in the ball list
 	ballList[2] = ball:new(700, 500)
-	
+
 	gametime = 0
 	lastSpawnTime = 0
 end
 
 function love.update(dt)
 	gametime = gametime + dt
-	
+	timer()
+
 	player.position.x = love.mouse.getX() -- set the player position to the cursor; note that we can access the x and y components of the vector object directly
 	player.position.y = love.mouse.getY()
-	
+
 	for i, v in ipairs(ballList) do -- generic for that loops through ballList and calls the update function of each ball
 		v:update(dt)
 	end
-	
+end
+
+-- Okay, so I don't exactly know how this works... But it does...
+function timer()
+	if gametime >= 1 then
+    dtotal = dtotal - 1
+    seconds = seconds + 1
+  end
+  if seconds == 60 then
+    seconds = 0
+    minutes = minutes + 1
+  end
+  if minutes == 60 then
+    minutes = 0
+    hours = hours + 1
+  end
+  if hours < 10 then
+    time = "0" .. hours
+  else
+    time = hours
+  end
+  if minutes < 10 then
+    time = time .. ":0" .. minutes
+  else
+    time = time .. ":" .. minutes
+  end
+  if seconds < 10 then
+    time = time .. ":0" .. seconds
+  else
+    time = time .. ":" .. seconds
+  end
 end
 
 function love.draw()
+	love.graphics.print("Time: " .. time, 20, 20)
+
 	for i, v in ipairs(ballList) do -- generic for that loops through ballList and calls the draw function of each ball
 		v:draw()
 	end

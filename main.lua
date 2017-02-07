@@ -21,6 +21,7 @@ player.position = vector.new(0, 0) -- use the vector library to make a vector ob
 ballList = {} -- a list that contains all of the balls in the game
 
 song = love.audio.newSource("Space_Juggler.wav") -- import music
+earth = love.graphics.newImage("Earthy.png") -- import sprite
 
 function love.load()
 	love.audio.play(song)

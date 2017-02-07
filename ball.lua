@@ -50,5 +50,6 @@ end
 
 function ball:draw()
 	love.graphics.setColor(255, 255, 255)
-	love.graphics.draw(earth, self.position.x - earth:getWidth()/2, self.position.y - earth:getHeight()/2)
+    
+    love.graphics.draw(earth, self.position.x - earth:getWidth() * 1.5, self.position.y - earth:getHeight() * 1.5, 0, 3)
 end

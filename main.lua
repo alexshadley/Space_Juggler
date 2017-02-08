@@ -41,21 +41,21 @@ function love.load()
 
 	background = love.graphics.newCanvas() -- create a background canvas to draw all background stars (default size is the screen dimensions
 	love.graphics.setCanvas(background) -- sets all future rendering operations to the canvas
-	
+
 	local w, h = love.window.getMode()
 	local numStars = w * h / 2000
-	
+
 	local stars = {}
-	for i = 0, numStars do -- make a shit-ton of stars
+	for i = 1, numStars do -- make a shit-ton of stars
 		table.insert(stars, star:new())
 	end
-	
+
 	for i, v in ipairs(stars) do
 		v:draw()
 	end
-	
+
 	love.graphics.setCanvas()
-	
+
 	love.audio.play(song)
 
 	love.mouse.setPosition(400, 300) -- start the mouse in the center of the screen at the beginning of the game

@@ -32,28 +32,28 @@ function love.load()
 
 	background = love.graphics.newCanvas() -- create a background canvas to draw all background stars (default size is the screen dimensions
 	love.graphics.setCanvas(background) -- sets all future rendering operations to the canvas
-	
+
 	local w, h = love.window.getMode()
 	local numStars = w * h / 2000
-	
+
 	local stars = {}
-	for i = 0, numStars do -- make a shit-ton of stars
+	for i = 1, numStars do -- make a shit-ton of stars
 		table.insert(stars, star:new())
 	end
-	
+
 	for i, v in ipairs(stars) do
 		v:draw()
 	end
-	
+
 	love.graphics.setCanvas()
-	
+
 	love.audio.play(song)
-	
+
 	love.mouse.setPosition(400, 300) -- start the mouse in the center of the screen at the beginning of the game
-	
+
 	ballList[1] = ball:new(100, 100) -- make some balls and put them in the ball list
 	ballList[2] = ball:new(700, 500)
-	
+
 	gametime = 0
 	lastSpawnTime = 0
 end
@@ -66,14 +66,14 @@ end
 
 function love.update(dt)
 	gametime = gametime + dt
-	
+
 	player.position.x = love.mouse.getX() -- set the player position to the cursor; note that we can access the x and y components of the vector object directly
 	player.position.y = love.mouse.getY()
-	
+
 	for i, v in ipairs(ballList) do -- generic for that loops through ballList and calls the update function of each ball
 		v:update(dt)
 	end
-	
+
 end
 
 function love.draw()

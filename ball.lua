@@ -49,8 +49,7 @@ function ball:update(dt)
 end
 
 function ball:draw()
-	love.graphics.setColor(30, 30, 150)
-	love.graphics.circle("fill", self.position.x, self.position.y, 16, 20) -- draw darker border
-	love.graphics.setColor(120, 120, 240)
-	love.graphics.circle("fill", self.position.x, self.position.y, 13, 20) -- draw lighter inside
+	love.graphics.setColor(255, 255, 255)
+    
+    love.graphics.draw(earth, self.position.x - earth:getWidth() * 1.5, self.position.y - earth:getHeight() * 1.5, 0, 3)
 end

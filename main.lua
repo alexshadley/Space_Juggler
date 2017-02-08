@@ -119,7 +119,12 @@ end
 
 function love.draw()
   love.graphics.draw(background)
-	love.graphics.print("Time: " .. time, 20, 20)
+
+  love.graphics.setNewFont("zero_hour.ttf", 40)
+  love.graphics.setColor(125, 125, 125)
+  love.graphics.rectangle("fill", 15, 15, 450, 55)
+  love.graphics.setColor(255, 255, 255)
+	love.graphics.print("Time: " .. time, 25, 20)
 
 	for i, v in ipairs(ballList) do -- generic for that loops through ballList and calls the draw function of each ball
 		v:draw()

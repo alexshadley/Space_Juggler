@@ -27,9 +27,9 @@ function love.load()
 
 	-- For the timer
   dtotal = 0
+  milSeconds = 0
   seconds = 0
   minutes = 0
-  hours = 0
   time = ""
 
 	love.audio.play(song)
@@ -45,7 +45,7 @@ end
 
 function love.update(dt)
 	gametime = gametime + dt
-	timer()
+	timer(dt)
 
 	player.position.x = love.mouse.getX() -- set the player position to the cursor; note that we can access the x and y components of the vector object directly
 	player.position.y = love.mouse.getY()
@@ -55,9 +55,14 @@ function love.update(dt)
 	end
 end
 
--- Okay, so I don't exactly know how this works... But it does...
-function timer()
-	if gametime >= 1 then
+-- Makes the timer in the top left hand corner
+function timer(dt)
+  dtotal = dtotal + dt
+  milSeconds = math.floor(dtotal * 100) -- Milliseconds
+  if milSeconds >= 100 then
+    milSeconds = 99
+  end
+	if dtotal >= 1 then
     dtotal = dtotal - 1
     seconds = seconds + 1
   end
@@ -65,24 +70,20 @@ function timer()
     seconds = 0
     minutes = minutes + 1
   end
-  if minutes == 60 then
-    minutes = 0
-    hours = hours + 1
-  end
-  if hours < 10 then
-    time = "0" .. hours
-  else
-    time = hours
-  end
   if minutes < 10 then
-    time = time .. ":0" .. minutes
+    time = "0" .. minutes
   else
-    time = time .. ":" .. minutes
+    time = minutes
   end
   if seconds < 10 then
     time = time .. ":0" .. seconds
   else
     time = time .. ":" .. seconds
+  end
+  if milSeconds < 10 then
+    time = time .. ":0" .. milSeconds
+  else
+    time = time .. ":" .. milSeconds
   end
 end
 
